@@ -1,0 +1,20 @@
+# cloudflare-pages.yml
+build:
+  # 如果有构建命令，例如 npm run build，在这里指定
+  command: "npm run build" 
+  # 输出目录，与Vercel配置中的一致
+  directory: dist 
+
+routes:
+  - src: /
+    dest: /welcome.html
+  - src: /(.*)
+    dest: /$1
+    headers:
+      # Cloudflare Pages设置CORS头的方式可能不同，这里仅供参考
+      - key: Access-Control-Allow-Credentials
+        value: "true"
+      - key: Access-Control-Allow-Methods
+        value: "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+      - key: Access-Control-Allow-Headers
+        value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Content-Type, Authorization"
